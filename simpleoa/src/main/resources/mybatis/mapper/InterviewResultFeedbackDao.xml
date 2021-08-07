@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.northking.springboot.dao.InterviewResultFeedbackDao">
+    <resultMap id="InterviewResultFeedback" type="net.northking.springboot.entities.InterviewResultFeedback">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="education" property="education"/>
+        <result column="phone" property="phone"/>
+        <result column="expected_salary" property="expectedSalary"/>
+        <result column="recommended_time" property="recommendedTime"/>
+        <result column="preliminary_screening_interview_time" property="preliminaryScreeningInterviewTime"/>
+        <result column="primary_screening_feedback" property="primaryScreeningFeedback"/>
+        <result column="preliminary_evaluation_salary" property="preliminaryEvaluationSalary"/>
+        <result column="direct_employment" property="directEmployment"/>
+        <result column="customer_name" property="customerName"/>
+        <result column="pecommended_position" property="pecommendedPosition"/>
+        <result column="customer_interview_time" property="customerInterviewTime"/>
+        <result column="on_site_interview" property="onSiteInterview"/>
+        <result column="custome_feedback" property="customeFeedback"/>
+        <result column="hire" property="hire"/>
+        <result column="employment_salary" property="employmentSalary"/>
+        <result column="estimated_entry_time" property="estimatedEntryTime"/>
+        <result column="employment" property="employment"/>
+        <result column="actual_entry_time" property="actualEntryTime"/>
+        <result column="salary_deviation" property="salaryDeviation"/>
+        <result column="archive" property="archive"/>
+        <result column="recommended_hr" property="recommendedHr"/>
+        <result column="remarks" property="remarks"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+    <insert id="insertResult">
+        INSERT INTO interview_result_feedback(name,education,phone,expected_salary,recommended_time,preliminary_screening_interview_time,
+        primary_screening_feedback,preliminary_evaluation_salary,direct_employment,customer_name,
+        pecommended_position,customer_interview_time,on_site_interview,custome_feedback,hire,employment_salary,
+        estimated_entry_time,employment,actual_entry_time,salary_deviation,archive,recommended_hr,remarks,user_id)
+        VALUES
+        <foreach collection="emps" item="emp" separator=",">
+            (#{emp.name},#{emp.education},#{emp.phone},#{emp.expectedSalary},#{emp.recommendedTime},#{emp.preliminaryScreeningInterviewTime},#{emp.primaryScreeningFeedback},#{emp.preliminaryEvaluationSalary},
+            #{emp.directEmployment},#{emp.customerName},#{emp.pecommendedPosition},#{emp.customerInterviewTime},#{emp.onSiteInterview},#{emp.customeFeedback},#{emp.hire},#{emp.employmentSalary},#{emp.estimatedEntryTime},
+            #{emp.employment},#{emp.actualEntryTime},#{emp.salaryDeviation},#{emp.archive},#{emp.recommendedHr},#{emp.remarks},#{emp.userId})
+        </foreach>
+    </insert>
+
+    <select id="selectByUserId" parameterType="java.lang.String" resultMap="InterviewResultFeedback">
+        SELECT * FROM interview_result_feedback
+        <where>
+            <if test="startTime != null and startTime != ''">
+                AND createTime >= #{startTime}
+            </if>
+            <if test="endTime !=null and endTime != ''">
+                AND createTime &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>

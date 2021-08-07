@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+ 
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="moment-with-locales.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+  </head>
+  <body>
+    
+<div class="row">
+  <div  style="width: 100%;">
+      <div class="form-group">
+         <div style="float: left;width:20%">
+            <label style="position: absolute;top:2%;left:20px">开始时间：</label>
+          <!--指定 date标记-->
+          <div style="margin-left: 110px;" class='input-group date' id='datetimepicker1'>
+              <input type='text' class="form-control" id="startDate"/>
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+          </div>
+        </div>
+          
+          <div style="float: left;width:20%">
+        
+              <label style="position: absolute;top:2%;left:415px">结束时间：</label>
+              <!--指定 date标记-->
+              <div  style="margin-left: 110px;" class='input-group date' id='datetimepicker2'>
+                  <input type='text' class="form-control" id="endDate"/>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+          </div>
+          <button id="export" style="margin-left: 37PX; margin-top: 6PX;">导出</button>
+      </div>
+      
+  </div>
+</div>
+    <script> 
+
+$(function () {
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: moment.locale('zh-cn')
+    });
+    $('#datetimepicker2').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: moment.locale('zh-cn')
+    });
+
+  })
+
+  $('#export').click(function(){
+    //console.log("开始时间",$('#startDate').val())
+    //console.log("结束时间",$('#endDate').val())
+
+})
+    </script> 
+    
+ </body>
+</html>
